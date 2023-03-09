@@ -46,7 +46,7 @@ export interface PathFindStatusRequest extends BasePathFindRequest {
  * The `path_find` method searches for a path along which a transaction can
  * possibly be made, and periodically sends updates when the path changes over
  * time. For a simpler version that is supported by JSON-RPC, see the
- * `ripple_path_find` method.
+ * `hchain_path_find` method.
  *
  * @category Requests
  */

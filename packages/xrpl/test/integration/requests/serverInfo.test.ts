@@ -71,7 +71,7 @@ describe('server_info (rippled)', function () {
             uptime: 8752,
             validated_ledger: {
               age: 0,
-              base_fee_xrp: 0.00001,
+              base_fee_hwa: 0.00001,
               hash: '532175EC25CF34081D7F83584F37DAB70035A422CBE94352BEDA8EC123CB8F60',
               reserve_base_xrp: 200,
               reserve_inc_xrp: 50,

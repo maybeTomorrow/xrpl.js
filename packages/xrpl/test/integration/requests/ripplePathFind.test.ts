@@ -12,7 +12,7 @@ import { generateFundedWallet } from '../utils'
 // how long before each test case times out
 const TIMEOUT = 20000
 
-describe('ripple_path_find', function () {
+describe('hchain_path_find', function () {
   let testContext: XrplIntegrationTestContext
 
   beforeEach(async () => {
@@ -25,7 +25,7 @@ describe('ripple_path_find', function () {
     async () => {
       const wallet2 = await generateFundedWallet(testContext.client)
       const ripplePathFind: RipplePathFindRequest = {
-        command: 'ripple_path_find',
+        command: 'hchain_path_find',
         subcommand: 'create',
         source_account: testContext.wallet.classicAddress,
         destination_account: wallet2.classicAddress,

@@ -25,7 +25,7 @@ describe('book_offers', function () {
       const bookOffer: BookOffersRequest = {
         command: 'book_offers',
         taker_gets: {
-          currency: 'XRP',
+          currency: 'HWA',
         },
         taker_pays: {
           currency: 'USD',

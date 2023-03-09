@@ -42,6 +42,7 @@ describe('Wallet', function () {
     const classicAddressPrefix = 'r'
     const ed25519KeyPrefix = 'ED'
     const secp256k1PrivateKeyPrefix = '00'
+    const sm2PrivateKeyPrefix = '01'
 
     it('generates a new wallet using default algorithm', function () {
       const wallet = Wallet.generate()
@@ -757,13 +758,13 @@ describe('Wallet', function () {
     it('sign throws when a payment contains an issued currency like XRP', async function () {
       const payment: Payment = { ...issuedCurrencyPayment }
       payment.Amount = {
-        currency: 'xrp',
+        currency: 'HWA',
         issuer: 'rnURbz5HLbvqEq69b1B4TX6cUTNMmcrBqi',
         value: '123.40',
       }
       assert.throws(() => {
         wallet.sign(payment)
-      }, /^Trying to sign an issued currency with a similar standard code to XRP \(received 'xrp'\)\. XRP is not an issued currency\./u)
+      }, /^Trying to sign an issued currency with a similar standard code to XRP \(received 'HWA'\)\. XRP is not an issued currency\./u)
     })
 
     it('sign does NOT throw when a payment contains an issued currency like xrp in hex string format', async function () {

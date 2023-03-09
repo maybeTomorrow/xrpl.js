@@ -2,6 +2,7 @@ import * as assert from 'assert'
 import brorand = require('brorand')
 import * as hashjs from 'hash.js'
 import * as elliptic from 'elliptic'
+import { sm2 } from 'sm-crypto'
 
 import * as addressCodec from 'ripple-address-codec'
 import { derivePrivateKey, accountPublicFromPublicGenerator } from './secp256k1'
@@ -16,7 +17,7 @@ const { bytesToHex } = utils
 function generateSeed(
   options: {
     entropy?: Uint8Array
-    algorithm?: 'ed25519' | 'ecdsa-secp256k1'
+    algorithm?: 'ed25519' | 'ecdsa-secp256k1' | 'sm2'
   } = {},
 ): string {
   assert.ok(
@@ -96,9 +97,42 @@ const ed25519 = {
     )
   },
 }
+const sm_crypto = {
+  deriveKeypair(entropy: Uint8Array): {
+    privateKey: string
+    publicKey: string
+  } {
+    const prefix = '01'
+    const kp = sm2.generateKeyPairHex(bytesToHex(entropy))
+    kp.privateKey = prefix + kp.privateKey
+    kp.publicKey = sm2.compressPublicKeyHex(kp.publicKey)
+    return kp
+  },
+
+  sign(message, privateKey): string {
+    // caution: Ed25519.sign interprets all strings as hex, stripping
+    // any non-hex characters without warning
+    assert.ok(Array.isArray(message), 'message must be array of octets')
+    const keypair = sm2.keyPairFromPk(privateKey.length == 66 ? privateKey.slice(2) : privateKey)
+    const sigValueHex6 = sm2.doSignature(message, keypair.privateKey, {
+      hash: true,
+      publicKey: keypair.publicKey,
+      der: true,
+    })
+    return sigValueHex6
+  },
+
+  verify(message, signature, publicKey): boolean {
+    const verifyResult5 = sm2.doVerifySignature(message, signature, publicKey, {
+      hash: true,
+      der: true,
+    })
+    return verifyResult5
+  },
+}
 
 function select(algorithm): any {
-  const methods = { 'ecdsa-secp256k1': secp256k1, ed25519 }
+  const methods = { 'ecdsa-secp256k1': secp256k1, ed25519, sm2: sm_crypto }
   return methods[algorithm]
 }
 
@@ -110,7 +144,10 @@ function deriveKeypair(
   privateKey: string
 } {
   const decoded = addressCodec.decodeSeed(seed)
-  const algorithm = decoded.type === 'ed25519' ? 'ed25519' : 'ecdsa-secp256k1'
+  let algorithm = decoded.type === 'ed25519' ? 'ed25519' : 'ecdsa-secp256k1'
+  if (options && options["algorithm"] === 'sm2') {
+    algorithm = options["algorithm"]
+  }
   const method = select(algorithm)
   const keypair = method.deriveKeypair(decoded.bytes, options)
   const messageToVerify = hash('This test message should verify.')
@@ -122,11 +159,15 @@ function deriveKeypair(
   return keypair
 }
 
-function getAlgorithmFromKey(key): 'ed25519' | 'ecdsa-secp256k1' {
+function getAlgorithmFromKey(key): 'ed25519' | 'ecdsa-secp256k1' | 'sm2' {
   const bytes = hexToBytes(key)
-  return bytes.length === 33 && bytes[0] === 0xed
-    ? 'ed25519'
-    : 'ecdsa-secp256k1'
+  if (bytes.length === 33 && bytes[0] === 0xed) {
+    return 'ed25519'
+  }
+  if (bytes.length === 33 && bytes[0] === 0x01) {
+    return 'sm2'
+  }
+  return 'ecdsa-secp256k1'
 }
 
 function sign(messageHex, privateKey): string {

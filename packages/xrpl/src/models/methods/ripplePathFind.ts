@@ -8,14 +8,14 @@ interface SourceCurrencyAmount {
 }
 
 /**
- * The `ripple_path_find` method is a simplified version of the path_find method
+ * The `hchain_path_find` method is a simplified version of the path_find method
  * that provides a single response with a payment path you can use right away.
  * Expects a response in the form of a {@link RipplePathFindResponse}.
  *
  * @category Requests
  */
 export interface RipplePathFindRequest extends BaseRequest {
-  command: 'ripple_path_find'
+  command: 'hchain_path_find'
   /** Unique address of the account that would send funds in a transaction. */
   source_account: string
   /** Unique address of the account that would receive funds in a transaction. */

@@ -267,7 +267,7 @@ describe('client.autofill', function () {
       result: {
         info: {
           validated_ledger: {
-            base_fee_xrp: 0.00001,
+            base_fee_hwa: 0.00001,
           },
         },
       },

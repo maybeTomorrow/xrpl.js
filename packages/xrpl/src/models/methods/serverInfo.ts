@@ -65,7 +65,7 @@ export interface ServerInfoResponse extends BaseResponse {
        */
       closed_ledger?: {
         age: number
-        base_fee_xrp: number
+        base_fee_hwa: number
         hash: string
         reserve_base_xrp: number
         reserve_inc_xrp: number
@@ -214,7 +214,7 @@ export interface ServerInfoResponse extends BaseResponse {
          * Base fee, in XRP. This may be represented in scientific notation.
          * Such as 1e-05 for 0.00005.
          */
-        base_fee_xrp: number
+        base_fee_hwa: number
         /** Unique hash for the ledger, as hexadecimal. */
         hash: string
         /**

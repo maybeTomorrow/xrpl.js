@@ -175,7 +175,7 @@ export const codec = codecWithXrpAlphabet
 // type is 'ed25519' or 'secp256k1'
 export function encodeSeed(
   entropy: Buffer,
-  type: 'ed25519' | 'secp256k1',
+  type: 'ed25519' | 'secp256k1' | 'sm2',
 ): string {
   if (entropy.length !== 16) {
     throw new Error('entropy must have length 16')

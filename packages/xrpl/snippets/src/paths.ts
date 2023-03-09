@@ -14,11 +14,11 @@ async function createTxWithPaths(): Promise<void> {
   }
 
   const request = {
-    command: 'ripple_path_find',
+    command: 'hchain_path_find',
     source_account: wallet.classicAddress,
     source_currencies: [
       {
-        currency: 'XRP',
+        currency: 'HWA',
       },
     ],
     destination_account,

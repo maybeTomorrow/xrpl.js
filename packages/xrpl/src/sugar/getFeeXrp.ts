@@ -23,11 +23,11 @@ export default async function getFeeXrp(
   const serverInfo = (await client.request({ command: 'server_info' })).result
     .info
 
-  const baseFee = serverInfo.validated_ledger?.base_fee_xrp
+  const baseFee = serverInfo.validated_ledger?.base_fee_hwa
 
   if (baseFee == null) {
     throw new XrplError(
-      'getFeeXrp: Could not get base_fee_xrp from server_info',
+      'getFeeXrp: Could not get base_fee_hwa from server_info',
     )
   }
 

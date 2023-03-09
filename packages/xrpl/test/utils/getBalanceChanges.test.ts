@@ -20,11 +20,11 @@ describe('getBalanceChanges', function () {
     const expected = [
       {
         account: 'rLDYrujdKUfVx28T9vRDAbyJ7G2WVXKo4K',
-        balances: [{ currency: 'XRP', value: '100' }],
+        balances: [{ currency: 'HWA', value: '100' }],
       },
       {
         account: 'rKmBGxocj9Abgy25J51Mk1iqFzW9aVF9Tc',
-        balances: [{ currency: 'XRP', value: '-100.012' }],
+        balances: [{ currency: 'HWA', value: '-100.012' }],
       },
     ]
     assert.deepStrictEqual(result, expected)
@@ -43,7 +43,7 @@ describe('getBalanceChanges', function () {
           },
           {
             value: '-0.012',
-            currency: 'XRP',
+            currency: 'HWA',
           },
         ],
       },
@@ -114,7 +114,7 @@ describe('getBalanceChanges', function () {
           },
           {
             value: '-0.012',
-            currency: 'XRP',
+            currency: 'HWA',
           },
         ],
       },
@@ -136,7 +136,7 @@ describe('getBalanceChanges', function () {
           },
           {
             value: '-0.012',
-            currency: 'XRP',
+            currency: 'HWA',
           },
         ],
       },
@@ -177,7 +177,7 @@ describe('getBalanceChanges', function () {
         balances: [
           {
             value: '-0.012',
-            currency: 'XRP',
+            currency: 'HWA',
           },
         ],
       },
@@ -197,7 +197,7 @@ describe('getBalanceChanges', function () {
             value: '10',
           },
           {
-            currency: 'XRP',
+            currency: 'HWA',
             value: '-0.012',
           },
         ],
@@ -224,7 +224,7 @@ describe('getBalanceChanges', function () {
         balances: [
           {
             value: '-0.012',
-            currency: 'XRP',
+            currency: 'HWA',
           },
         ],
       },
@@ -239,7 +239,7 @@ describe('getBalanceChanges', function () {
         account: 'rsApBGKJmMfExxZBrGnzxEXyq7TMhMRg4e',
         balances: [
           {
-            currency: 'XRP',
+            currency: 'HWA',
             value: '-0.00001',
           },
         ],
@@ -286,7 +286,7 @@ describe('getBalanceChanges', function () {
           },
           {
             value: '-0.012',
-            currency: 'XRP',
+            currency: 'HWA',
           },
         ],
       },
@@ -316,7 +316,7 @@ describe('getBalanceChanges', function () {
             value: '-100',
           },
           {
-            currency: 'XRP',
+            currency: 'HWA',
             value: '-0.00001',
           },
         ],
@@ -347,7 +347,7 @@ describe('getBalanceChanges', function () {
             value: '-200',
           },
           {
-            currency: 'XRP',
+            currency: 'HWA',
             value: '-0.00001',
           },
         ],
@@ -383,7 +383,7 @@ describe('getBalanceChanges', function () {
             value: '-100',
           },
           {
-            currency: 'XRP',
+            currency: 'HWA',
             value: '-0.00001',
           },
           {

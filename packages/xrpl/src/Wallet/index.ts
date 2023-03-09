@@ -128,7 +128,7 @@ class Wallet {
    */
   public static generate(algorithm: ECDSA = DEFAULT_ALGORITHM): Wallet {
     const seed = generateSeed({ algorithm })
-    return Wallet.fromSeed(seed)
+    return Wallet.fromSeed(seed, { algorithm })
   }
 
   /**
@@ -263,6 +263,8 @@ class Wallet {
     const seed = rfc1751MnemonicToKey(mnemonic)
     let encodeAlgorithm: 'ed25519' | 'secp256k1'
     if (opts.algorithm === ECDSA.ed25519) {
+      encodeAlgorithm = 'ed25519'
+    } else if (opts.algorithm === ECDSA.sm2) {
       encodeAlgorithm = 'ed25519'
     } else {
       // Defaults to secp256k1 since that's the default for `wallet_propose`
@@ -476,7 +478,7 @@ class Wallet {
 
         if (
           txCurrency.length === standard_currency_code_len &&
-          txCurrency.toUpperCase() === 'XRP'
+          txCurrency.toUpperCase() === 'HWA'
         ) {
           throw new XrplError(
             `Trying to sign an issued currency with a similar standard code to XRP (received '${txCurrency}'). XRP is not an issued currency.`,
@@ -566,7 +568,7 @@ function removeTrailingZeros(tx: Transaction): void {
 /* eslint-disable @typescript-eslint/no-magic-numbers -- Magic numbers are from rippleds of currency code encoding */
 function isoToHex(iso: string): string {
   const bytes = Buffer.alloc(20)
-  if (iso !== 'XRP') {
+  if (iso !== 'HWA') {
     const isoBytes = iso.split('').map((chr) => chr.charCodeAt(0))
     bytes.set(isoBytes, 12)
   }

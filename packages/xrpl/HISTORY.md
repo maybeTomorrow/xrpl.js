@@ -183,7 +183,7 @@ A migration guide is available at https://xrpl.org/xrpljs2-migration-guide.html.
   * `api.getTransaction` -> `client.request({command: 'tx', ...})`
   * `api.getTransactions` -> `client.request({command: 'account_tx', ...})`
   * `api.getTrustlines` -> `client.request({command: 'account_lines', ...})`
-  * `api.getPaths` -> `client.request({command: ripple_path_find, ...})`
+  * `api.getPaths` -> `client.request({command: hchain_path_find, ...})`
 * Helper methods/utils that are no longer necessary (such as `renameCounterpartyToIssuer` and `formatBidsAndAsks`)
 
 ### Security
@@ -1689,7 +1689,7 @@ __OTHER CHANGES__
         parseBinary: false
       }
     ```
-+ Added full currency name support, e.g. `Currency.from_json('XRP').to_human({full_name:'Ripples'})` will return `XRP - Ripples`
++ Added full currency name support, e.g. `Currency.from_json('HWA').to_human({full_name:'Ripples'})` will return `XRP - Ripples`
 + Improved interest bearing currency support, e.g. `Currency.from_human('USD - US Dollar (2.5%pa)')`
 + Improve test coverage
 + Added blob vault client.  The vault client facilitates interaction with ripple's namespace and blob vault or 3rd party blob vaults using ripple's blob vault software (https://github.com/ripple/ripple-blobvault). A list of the available functions can be found at [docs/VAULTCLIENT.md](docs/VAULTCLIENT.md)
