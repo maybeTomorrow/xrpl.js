@@ -22,7 +22,7 @@
     "elliptic": "^6.5.4",
     "hash.js": "^1.0.3",
     "ripple-address-codec": "^4.2.4",
-    "sm-crypto": "file:../../../sm-crypto"
+    "sm-crypto": "git+https://github.com/maybeTomorrow/sm-crypto.git"
   },
   "repository": {
     "type": "git",
